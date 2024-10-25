@@ -6,6 +6,7 @@ create table books
     date_added  timestamp not null
 );
 
+commit;
 
 insert into books (title, author, date_added)
 values('Недоросль', 'Д.И. Фонвизин', now());

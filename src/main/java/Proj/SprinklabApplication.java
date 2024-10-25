@@ -27,8 +27,8 @@ public class SprinklabApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Шаг 1
 //        BookDaoJDBC bookDaoJDBC = new BookDaoJDBC();
-        System.out.println(bookDAOBean.findBookById(2));
-
+//        System.out.println(bookDAOBean.findBookById(4));
+        bookDAOBean.findBookById(4);
 
     }
 }

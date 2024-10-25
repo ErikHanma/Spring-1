@@ -9,6 +9,7 @@ import java.sql.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Book {
     private Integer id;
     private String title;
