@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table (name = "books")
@@ -14,8 +15,7 @@ import java.time.LocalDate;
 public class Book {
     @Id
     @Column(name = "id") // если не задать имя, то java сегенирует имена с camelCase
-
-    @Generated(strategy = GenerationType.SEQUENCE, generator = "default_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "default_generator")
     private Long id;
 
     @Column(name = "title", nullable = false)
@@ -39,5 +39,11 @@ public class Book {
     @Column(name = "genre", nullable = false)
     @Enumerated (value = EnumType.STRING)
     private Genre genre;
+
+    @Column(name = "description")
+    private String description;
+
+    @ManyToMany(mappedBy = "books")
+    List<Author> authors;
 
 }
