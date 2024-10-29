@@ -17,4 +17,4 @@ values('Война и Мир', 'Л.Н. Толстой', now() - interval '24h');
 insert into books (title, author, date_added)
 values('Братья Карамазовы', 'Ф.М. Достоевский', now() - interval '24h');
 
-select * from books
+select * from public.books_authors

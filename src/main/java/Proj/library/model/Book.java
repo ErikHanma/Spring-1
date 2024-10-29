@@ -1,5 +1,6 @@
 package Proj.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Book extends GenericModel{
     @Id
     @Column(name = "id") // если не задать имя, то java сегенирует имена с camelCase
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "default_generator")
@@ -43,7 +44,12 @@ public class Book {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "books")
+    @JsonIgnore
+    // Избавляет от ошибки Stack Overflow, JSON зацикливается: У книги есть автор, у автора есть книга, у книги
+    @ManyToMany
+    @JoinTable(name = "books_authors", // чтобы таблицы books и authors стали равнозначными. До этого authors была главнее
+            joinColumns = @JoinColumn(name = "book_id"), foreignKey = @ForeignKey(name = "FK_BOOKS_AUTHORS"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"), inverseForeignKey = @ForeignKey(name = "FK_AUTHORS_BOOKS"))
     List<Author> authors;
 
 }
