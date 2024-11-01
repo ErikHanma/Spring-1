@@ -46,7 +46,7 @@ public class Book extends GenericModel{
 
     @JsonIgnore
     // Избавляет от ошибки Stack Overflow, JSON зацикливается: У книги есть автор, у автора есть книга, у книги
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "books_authors", // чтобы таблицы books и authors стали равнозначными. До этого authors была главнее
             joinColumns = @JoinColumn(name = "book_id"), foreignKey = @ForeignKey(name = "FK_BOOKS_AUTHORS"),
             inverseJoinColumns = @JoinColumn(name = "author_id"), inverseForeignKey = @ForeignKey(name = "FK_AUTHORS_BOOKS"))
